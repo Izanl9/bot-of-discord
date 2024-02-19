@@ -1,0 +1,81 @@
+import random as r
+import discord
+from discord.ext import commands
+import os
+
+p3='images/3.png'
+p='images/4.png'
+intents = discord.Intents.default()
+intents.message_content = True
+
+bot = commands.Bot(command_prefix='.', intents=intents)
+def get_duck_image_url():    
+    url = 'https://random-d.uk/api/random'
+#    res = requests.get(url)
+ #   data = res.json()
+ #   return data['url']
+
+
+
+@bot.event
+async def on_ready():
+    print(f'We have logged in as {bot.user}')
+@bot.command('duck')
+async def duck(ctx):
+    '''Una vez que llamamos al comando duck 
+    el programa llama a la función get_duck_image_url'''
+    image_url = get_duck_image_url()
+    await ctx.send(image_url)
+@bot.command()
+async def hello(ctx):
+    '''Una vez que llamamos al comando hello el programa saluda'''
+    await ctx.send(f'Hola, soy un bot {bot.user}!')
+@bot.command()
+async def gd(ctx, count_heh = r.randint(1,100)):
+    '''Una vez que llamamos al comando gd sale cuantasveces es simp una obsidana'''
+    await ctx.send("simp = " * count_heh,'al mojar')
+
+@bot.command()
+async def xd(ctx):
+    x = r.choice(os.listdir('images'))
+    '''sirve para que envie imagenes'''
+    with open(f'images/{x}', 'rb') as f:
+            picture = discord.File(f)
+    # A continuación, podemos enviar este archivo como parámetro.
+    await ctx.send(file=picture)
+@bot.command()
+async def pl(ctx):
+    '''te da un party leader'''
+    y = r.choice(os.listdir('pl'))
+    with open(f'images/{y}', 'rb') as f:
+            picture = discord.File(f)
+    # A continuación, podemos enviar este archivo como parámetro.
+    await ctx.send(file=picture)
+    
+@bot.command()
+async def q3(ctx,):
+    with open('images/3.png', 'rb') as f:
+        # ¡Vamos a almacenar el archivo de la biblioteca Discord convertido en esta variable!
+        picture = discord.File(f)
+    # A continuación, podemos enviar este archivo como parámetro.
+    await ctx.send(file=picture)
+@bot.command()
+async def reciclaje(ctx):
+    ry = r.randint(1,4)
+    num = r.randint(1,25)
+    re=''
+    
+    if ry ==1:
+        re='recicla '+ str(num)+'kg de basura'
+    elif ry ==2:
+        re='intenta estar '+str(num)+'dias sinusar transporte privado o usar gases dañinos'
+    else:
+        re=f'enviame {num}00€ a mi paypal:'
+    await ctx.send(re)
+@bot.command()
+async def paypal(ctx):
+    with open('images/paypal.png', 'rb') as f:
+        # ¡Vamos a almacenar el archivo de la biblioteca Discord convertido en esta variable!
+        picture = discord.File(f)
+    await ctx.send(file=picture)
+bot.run("HERE THE BOT CODE")
