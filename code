@@ -74,7 +74,7 @@ async def reciclaje(ctx):
     await ctx.send(re)
 @bot.command()
 async def paypal(ctx):
-    with open('images/paypal.png', 'rb') as f:
+    with open('images/paypal.jpeg', 'rb') as f:
         # ¡Vamos a almacenar el archivo de la biblioteca Discord convertido en esta variable!
         picture = discord.File(f)
     await ctx.send(file=picture)
